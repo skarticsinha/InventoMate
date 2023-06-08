@@ -1,15 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package pos.pro;
+package inventomate;
 
 import javax.swing.JPanel;
 
-/**
- *
- * @author coolsasisndu@gmail.com yt.com /techinbox
- */
 public class JpanelLoader {
    
    public  void jPanelLoader(JPanel Main,JPanel setPanel){

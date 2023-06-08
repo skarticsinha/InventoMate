@@ -2,6 +2,8 @@ package inventomate;
 
 public class Home extends javax.swing.JFrame {
 
+    JpanelLoader jpload = new JpanelLoader();
+    
     public Home() {
         initComponents();
         this.setExtendedState(Home.MAXIMIZED_BOTH);
@@ -199,19 +201,28 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        // Customer load
+        Customer cus = new Customer();
+        jpload.jPanelLoader(panel_load, cus);
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
+        // Supplier load
+        Supplier sp = new Supplier();
+        jpload.jPanelLoader(panel_load, sp);
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
-        // TODO add your handling code here:
+        // Employee load
+        Employee emp = new Employee();
+        jpload.jPanelLoader(panel_load, emp);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
 
     private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        // TODO add your handling code here:
+        // Products load
+        Product prod = new Product();
+        jpload.jPanelLoader(panel_load, prod);
     }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
