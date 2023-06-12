@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -218,6 +219,11 @@ public class Customer extends javax.swing.JPanel {
                 "ID", "Customer Name", "T.P.Number"
             }
         ));
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable2);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -312,6 +318,8 @@ public class Customer extends javax.swing.JPanel {
             Statement s = DB.mycon().createStatement();
             s.executeUpdate("Insert INTO Customer(Customer_NAme, TP_Number) values('" + name + "','" + tp + "')");
             s.close();
+            
+            JOptionPane.showMessageDialog(null,"Data Saved...");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -380,6 +388,7 @@ public class Customer extends javax.swing.JPanel {
             Statement s = DB.mycon().createStatement();
             s.executeUpdate("UPDATE Customer SET Customer_Name='" + name + "',TP_Number='" + tp + "' Where C_ID='" + id + "' ");
             s.close();
+            JOptionPane.showMessageDialog(null,"Data Updated...");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -408,6 +417,8 @@ public class Customer extends javax.swing.JPanel {
 
             stmt.close();
             con.close();
+            
+            JOptionPane.showMessageDialog(null,"Data Deleted...");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -418,6 +429,21 @@ public class Customer extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        // Table Mouse click to get data
+        
+        int row_select = jTable2.getSelectedRow();
+        
+        String id = jTable2.getValueAt(row_select, 0).toString();
+        String name = jTable2.getValueAt(row_select, 1).toString();
+        String tp = jTable2.getValueAt(row_select, 2).toString();
+        
+        c_id.setText(id);
+        c_name.setText(name);
+        c_tp.setText(tp);
+        
+    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
