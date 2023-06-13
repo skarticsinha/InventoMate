@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 import java.util.Vector;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,14 +21,31 @@ import javax.swing.JOptionPane;
  */
 public class Customer extends javax.swing.JPanel {
 
+    private DefaultTableModel searchTableModel;
+
     /**
      * Creates new form Customer
      */
     public Customer() {
         initComponents();
 
+        // Initialize the search table model
+        searchTableModel = new DefaultTableModel();
+        searchTableModel.addColumn("ID");
+        searchTableModel.addColumn("Customer Name");
+        searchTableModel.addColumn("T.P.Number");
+
+        // Set the search table model for the table
+        jTable2.setModel(searchTableModel);
+
         tb_load();
 
+        // Add key released event listener to the search text field
+        c_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                c_searchKeyTyped(evt);
+            }
+        });
     }
 
     public void tb_load() {
@@ -83,6 +102,9 @@ public class Customer extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         c_id = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        c_search = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -204,7 +226,7 @@ public class Customer extends javax.swing.JPanel {
                     .addComponent(jButton2)
                     .addComponent(jButton3)
                     .addComponent(jButton4))
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         jTable2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
@@ -271,8 +293,22 @@ public class Customer extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(c_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addContainerGap(10, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        c_search.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        c_search.setText("0");
+        c_search.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                c_searchKeyTyped(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel8.setText(":");
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("Search");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -283,21 +319,36 @@ public class Customer extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 191, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(c_search, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(c_search, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -318,8 +369,8 @@ public class Customer extends javax.swing.JPanel {
             Statement s = DB.mycon().createStatement();
             s.executeUpdate("Insert INTO Customer(Customer_NAme, TP_Number) values('" + name + "','" + tp + "')");
             s.close();
-            
-            JOptionPane.showMessageDialog(null,"Data Saved...");
+
+            JOptionPane.showMessageDialog(null, "Data Saved...");
 
         } catch (Exception e) {
             System.out.println(e);
@@ -388,7 +439,7 @@ public class Customer extends javax.swing.JPanel {
             Statement s = DB.mycon().createStatement();
             s.executeUpdate("UPDATE Customer SET Customer_Name='" + name + "',TP_Number='" + tp + "' Where C_ID='" + id + "' ");
             s.close();
-            JOptionPane.showMessageDialog(null,"Data Updated...");
+            JOptionPane.showMessageDialog(null, "Data Updated...");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -417,8 +468,8 @@ public class Customer extends javax.swing.JPanel {
 
             stmt.close();
             con.close();
-            
-            JOptionPane.showMessageDialog(null,"Data Deleted...");
+
+            JOptionPane.showMessageDialog(null, "Data Deleted...");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -432,23 +483,60 @@ public class Customer extends javax.swing.JPanel {
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // Table Mouse click to get data
-        
+
         int row_select = jTable2.getSelectedRow();
-        
+
         String id = jTable2.getValueAt(row_select, 0).toString();
         String name = jTable2.getValueAt(row_select, 1).toString();
         String tp = jTable2.getValueAt(row_select, 2).toString();
-        
+
         c_id.setText(id);
         c_name.setText(name);
         c_tp.setText(tp);
-        
+
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void c_searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_c_searchKeyTyped
+        // Search code
+        String searchValue = "%" + c_search.getText() + "%";
+        String searchQuery = "SELECT * FROM Customer WHERE C_id LIKE ? OR Customer_Name LIKE ? OR TP_Number LIKE ?";
+
+        try {
+            Connection con = DB.mycon();
+            if (con != null) {
+                PreparedStatement stmt = con.prepareStatement(searchQuery);
+                stmt.setString(1, searchValue);
+                stmt.setString(2, searchValue);
+                stmt.setString(3, searchValue);
+
+                ResultSet rs = stmt.executeQuery();
+
+                // Clear the existing search table data
+                searchTableModel.setRowCount(0);
+
+                while (rs.next()) {
+                    String id = rs.getString(1);
+                    String name = rs.getString(2);
+                    String tpNumber = rs.getString(3);
+
+                    // Add the matching row to the search table model
+                    searchTableModel.addRow(new Object[]{id, name, tpNumber});
+                }
+
+                // Close the statement and result set
+                stmt.close();
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_c_searchKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField c_id;
     private javax.swing.JTextField c_name;
+    private javax.swing.JTextField c_search;
     private javax.swing.JTextField c_tp;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -461,6 +549,8 @@ public class Customer extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
