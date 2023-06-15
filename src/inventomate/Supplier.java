@@ -36,7 +36,7 @@ public class Supplier extends javax.swing.JPanel {
         searchTableModel.addColumn("T.P.Number");
 
         // Set the search table model for the table
-        jTable3.setModel(searchTableModel);
+        jTable2.setModel(searchTableModel);
 
         tb_load();
 
@@ -52,7 +52,7 @@ public class Supplier extends javax.swing.JPanel {
 
         try {
 
-            DefaultTableModel dt = (DefaultTableModel) jTable3.getModel();
+            DefaultTableModel dt = (DefaultTableModel) jTable2.getModel();
             dt.setRowCount(0);
 
 //            String tbQuery = "SELECT * FROM Supplier WHERE S_ID = ?";
@@ -96,7 +96,7 @@ public class Supplier extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTable2 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -229,8 +229,8 @@ public class Supplier extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTable3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -241,12 +241,12 @@ public class Supplier extends javax.swing.JPanel {
                 "ID", "Customer Name", "T.P.Number"
             }
         ));
-        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable3MouseClicked(evt);
+                jTable2MouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable3);
+        jScrollPane2.setViewportView(jTable2);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -481,20 +481,20 @@ public class Supplier extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
         // Table Mouse click to get data
 
-        int row_select = jTable3.getSelectedRow();
+        int row_select = jTable2.getSelectedRow();
 
-        String id = jTable3.getValueAt(row_select, 0).toString();
-        String name = jTable3.getValueAt(row_select, 1).toString();
-        String tp = jTable3.getValueAt(row_select, 2).toString();
+        String id = jTable2.getValueAt(row_select, 0).toString();
+        String name = jTable2.getValueAt(row_select, 1).toString();
+        String tp = jTable2.getValueAt(row_select, 2).toString();
 
         s_id.setText(id);
         s_name.setText(name);
         s_tp.setText(tp);
 
-    }//GEN-LAST:event_jTable3MouseClicked
+    }//GEN-LAST:event_jTable2MouseClicked
 
     private void s_searchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_s_searchKeyTyped
         // Search code
@@ -550,7 +550,7 @@ public class Supplier extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField s_id;
     private javax.swing.JTextField s_name;
     private javax.swing.JTextField s_search;
