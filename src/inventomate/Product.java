@@ -18,14 +18,35 @@ import javax.swing.table.DefaultTableModel;
  * @author SBS-Pro
  */
 public class Product extends javax.swing.JPanel {
-
+    
+    private DefaultTableModel searchTableModel;
+    
     /**
      * Creates new form Customer
      */
     public Product() {
         initComponents();
         
+        // Initialize the search table model
+        searchTableModel = new DefaultTableModel();
+        searchTableModel.addColumn("ID");
+        searchTableModel.addColumn("Product Name");
+        searchTableModel.addColumn("Bar Code");
+        searchTableModel.addColumn("Price");
+        searchTableModel.addColumn("Quantity");
+        searchTableModel.addColumn("Supplier's ID");
+
+        // Set the search table model for the table
+        jTable4.setModel(searchTableModel);
+
         tb_load();
+
+        // Add key released event listener to the search text field
+        pSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pSearchKeyTyped(evt);
+            }
+        });
     }
 
     public void tb_load() {
@@ -89,6 +110,9 @@ public class Product extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         pId = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        pSearch = new javax.swing.JTextField();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -355,6 +379,20 @@ public class Product extends javax.swing.JPanel {
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
+        jLabel14.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel14.setText("Search");
+
+        jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel15.setText(":");
+
+        pSearch.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        pSearch.setText("0");
+        pSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                pSearchKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -364,17 +402,32 @@ public class Product extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 481, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane2)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel15)
+                            .addComponent(pSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -555,6 +608,46 @@ public class Product extends javax.swing.JPanel {
 
     }//GEN-LAST:event_jTable4MouseClicked
 
+    private void pSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_pSearchKeyTyped
+        // Search code
+        String searchValue = "%" + pSearch.getText() + "%";
+        String searchQuery = "SELECT * FROM Products WHERE P_ID LIKE ? OR Product_Name LIKE ? OR Bar_Code LIKE ? OR S_ID LIKE ?";
+
+        try {
+            Connection con = DB.mycon();
+            if (con != null) {
+                PreparedStatement stmt = con.prepareStatement(searchQuery);
+                stmt.setString(1, searchValue);
+                stmt.setString(2, searchValue);
+                stmt.setString(3, searchValue);
+                stmt.setString(4, searchValue);
+
+                ResultSet rs = stmt.executeQuery();
+
+                // Clear the existing search table data
+                searchTableModel.setRowCount(0);
+
+                while (rs.next()) {
+                    String pid = rs.getString(1);
+                    String name = rs.getString(2);
+                    String code = rs.getString(3);
+                    String price = rs.getString(4);
+                    String qty = rs.getString(5);
+                    String sid = rs.getString(6);
+
+                    // Add the matching row to the search table model
+                    searchTableModel.addRow(new Object[]{pid, name, code, price, qty, sid});
+                }
+
+                // Close the statement and result set
+                stmt.close();
+                rs.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_pSearchKeyTyped
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -566,6 +659,8 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -584,5 +679,6 @@ public class Product extends javax.swing.JPanel {
     private javax.swing.JTextField pPrice;
     private javax.swing.JTextField pQty;
     private javax.swing.JTextField pSId;
+    private javax.swing.JTextField pSearch;
     // End of variables declaration//GEN-END:variables
 }
