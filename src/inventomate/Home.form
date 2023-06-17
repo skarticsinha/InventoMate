@@ -72,13 +72,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jToggleButton1" alignment="1" max="32767" attributes="0"/>
-                      <Component id="jToggleButton2" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton3" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton4" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton5" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton6" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton7" pref="170" max="32767" attributes="0"/>
-                      <Component id="jToggleButton8" pref="170" max="32767" attributes="0"/>
+                      <Component id="jToggleButton2" max="32767" attributes="0"/>
+                      <Component id="jToggleButton3" max="32767" attributes="0"/>
+                      <Component id="jToggleButton4" max="32767" attributes="0"/>
+                      <Component id="jToggleButton5" max="32767" attributes="0"/>
+                      <Component id="jToggleButton6" max="32767" attributes="0"/>
+                      <Component id="jToggleButton7" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -101,9 +100,7 @@
                   <Component id="jToggleButton6" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jToggleButton7" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jToggleButton8" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="180" max="32767" attributes="0"/>
+                  <EmptySpace pref="138" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,6 +115,9 @@
               <FontInfo relative="true">
                 <Font bold="true" component="jToggleButton1" property="font" relativeSize="true" size="6"/>
               </FontInfo>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Customer.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Customers"/>
           </Properties>
@@ -135,6 +135,9 @@
                 <Font bold="true" component="jToggleButton2" property="font" relativeSize="true" size="6"/>
               </FontInfo>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Supplier.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Supplier"/>
           </Properties>
           <Events>
@@ -150,6 +153,9 @@
               <FontInfo relative="true">
                 <Font bold="true" component="jToggleButton3" property="font" relativeSize="true" size="6"/>
               </FontInfo>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Employee.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Employee"/>
           </Properties>
@@ -167,6 +173,9 @@
                 <Font bold="true" component="jToggleButton4" property="font" relativeSize="true" size="6"/>
               </FontInfo>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Products.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Products"/>
           </Properties>
           <Events>
@@ -182,6 +191,9 @@
               <FontInfo relative="true">
                 <Font bold="true" component="jToggleButton5" property="font" relativeSize="true" size="6"/>
               </FontInfo>
+            </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Sales.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Sales"/>
           </Properties>
@@ -199,6 +211,9 @@
                 <Font bold="true" component="jToggleButton6" property="font" relativeSize="true" size="6"/>
               </FontInfo>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Invoice.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Invoice"/>
           </Properties>
           <Events>
@@ -215,26 +230,13 @@
                 <Font bold="true" component="jToggleButton7" property="font" relativeSize="true" size="6"/>
               </FontInfo>
             </Property>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/inventomate/img/Reports.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Reports"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton7ActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JToggleButton" name="jToggleButton8">
-          <Properties>
-            <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-              <ComponentRef name="home_btn_grp"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.modules.form.editors2.FontEditor">
-              <FontInfo relative="true">
-                <Font bold="true" component="jToggleButton8" property="font" relativeSize="true" size="6"/>
-              </FontInfo>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Customers"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton8ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -251,7 +253,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="1065" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="1071" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
